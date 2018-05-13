@@ -14,9 +14,8 @@ import io.reactivex.functions.Consumer;
  * Created by hanz on 20.03.2018.
  */
 
-public abstract class BaseActivity
-        extends Activity
-        implements ObservableActivity {
+public abstract class BaseActivity extends Activity implements ObservableActivity {
+
     private Observable<String> observable
             = Observable.just(ON_BACK_PRESSED);
 
@@ -37,13 +36,13 @@ public abstract class BaseActivity
 
     @Override
     public void onBackPressed() {
-       if(backPressedListeners.size() > 1){
-           callLastFragment();
-       } else {
-           Stream.of(backPressedListeners).
-                   forEach(item -> observable.subscribe(item));
-       }
-}
+        if (backPressedListeners.size() > 1) {
+            callLastFragment();
+        } else {
+            Stream.of(backPressedListeners).
+                    forEach(item -> observable.subscribe(item));
+        }
+    }
 
     public void callLastFragment() {
         try {
